@@ -22,6 +22,8 @@ namespace BitwiseOperation
         {
             foreach (StatusFlags flag in Enum.GetValues(typeof(StatusFlags)))
             {
+                if (flag == StatusFlags.None) continue;
+
                 var flagToggle = GameObject.Instantiate<GameObject>(toggleObject, togglesPanelTransform);
                 flagToggle.GetComponentInChildren<Text>().text = flag.ToString();
                 toggleDictionary.Add(flag, flagToggle.GetComponentInChildren<Toggle>());
@@ -35,7 +37,9 @@ namespace BitwiseOperation
             byteText.text = ((byte)status).ToString();
             foreach (StatusFlags flag in Enum.GetValues(typeof(StatusFlags)))
             {
-                toggleDictionary[flag].isOn = status.HasFlag(flag);
+                if (flag == StatusFlags.None) continue;
+
+                toggleDictionary[flag].isOn = (status == (status | flag));
             }
         }
     }

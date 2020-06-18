@@ -22,6 +22,8 @@ namespace BitwiseOperation
 
             foreach (StatusFlags flag in Enum.GetValues(typeof(StatusFlags)))
             {
+                if (flag == StatusFlags.None) continue;
+
                 var flagButton = GameObject.Instantiate<GameObject>(buttonObject, buttonPanelTransform);
                 flagButton.GetComponentInChildren<Text>().text = flag.ToString();
                 flagButton.GetComponentInChildren<Button>().onClick.AddListener(() => DelStatus(flag));
