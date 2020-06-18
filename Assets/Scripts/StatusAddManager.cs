@@ -18,7 +18,9 @@ namespace BitwiseOperation
         {
             var randomButton = GameObject.Instantiate<GameObject>(buttonObject, buttonPanelTransform);
             randomButton.GetComponentInChildren<Text>().text = "Random";
-            randomButton.GetComponentInChildren<Button>().onClick.AddListener(() => AddStatus((StatusFlags)UnityEngine.Random.Range(0, (int)StatusFlags.Paralysed * 2)));
+            randomButton.GetComponentInChildren<Button>().onClick.AddListener(() => {
+                AddStatus((StatusFlags)UnityEngine.Random.Range(0, 1 << Enum.GetValues(typeof(StatusFlags)).Length));
+            });
 
             foreach (StatusFlags flag in Enum.GetValues(typeof(StatusFlags)))
             {
